@@ -31,11 +31,7 @@ repository coding workflows.
   regression risk.
 - `verify-change`: validate current changes with tests, builds, static checks,
   or manual evidence.
-- `git-commit`: prepare commits and push only when explicitly requested.
-
-## Templates
-
-Runtime templates packaged with this plugin live in `templates/`.
+- `commit-changes`: prepare commits and push only when explicitly requested.
 
 ## MCP Servers
 

@@ -41,8 +41,7 @@ Lazyday 的方向是把这些内容产品化为插件：
 | Codex plugin manifest | `plugins/lazyday-coding/.codex-plugin/plugin.json` | Codex 插件描述、技能入口和展示信息 |
 | Claude plugin manifest | `plugins/lazyday-coding/.claude-plugin/plugin.json` | Claude Code 插件描述和技能入口 |
 | Shared skills | `plugins/lazyday-coding/skills/` | 双运行时共享的 Lazyday 工作流 |
-| Runtime templates | `plugins/lazyday-coding/templates/` | 插件随包分发的项目模板 |
-| Bootstrap templates | `templates/` | 创建新插件或初始化目标项目的模板 |
+| Rule templates | `rules/` | 深度优化的 AGENTS / CLAUDE / Skill / MCP 模板 |
 | Validation | `scripts/validate.sh` | 本地校验 Codex / Claude Code 插件结构 |
 
 ## Current Plugin: lazyday-coding
@@ -57,7 +56,7 @@ Lazyday 的方向是把这些内容产品化为插件：
 | `diagnose-problem` | 分析 bug、日志、测试失败、线上异常 | 时间线、候选根因、影响范围、修复建议 |
 | `review-code` | Review 当前 diff、PR、文件或方案 | Findings、严重级别、行号证据、测试缺口 |
 | `verify-change` | 跑测试、验证修复、交付前检查 | 验证矩阵、命令结果、未覆盖路径 |
-| `git-commit` | 生成提交信息、提交、按要求推送 | 提交范围判断、commit message、push 结果 |
+| `commit-changes` | 生成提交信息、提交、按要求推送 | 提交范围判断、commit message、push 结果 |
 
 这些技能默认遵守 Lazyday 的核心工程约束：
 
@@ -67,6 +66,64 @@ Lazyday 的方向是把这些内容产品化为插件：
 - 每一行改动都服务当前任务。
 - 高风险决策先让人确认。
 - 没有验证证据，不算完成。
+
+## Rules & AGENTS.md
+
+Lazyday 不只有插件技能，还沉淀了一套可复制到任意仓库的 AI 编程规则模板。这里最有价值的是 `rules/AGENTS.md`：它不是普通 prompt，而是一份跨项目恒定成立的 agent 工作协议。
+
+这份模板解决的是插件无法单独覆盖的问题：当 agent 进入具体代码仓库时，它需要稳定理解工作边界、只读模式、风险分级、dirty worktree、确认门、验证证据、并发协作和最终交付格式。`AGENTS.md` 把这些规则放到仓库内，让 Codex 这类遵循 AGENTS 约定的工具可以在每次任务开始时自动读取。
+
+### What the template enforces
+
+| Area | Rule |
+| --- | --- |
+| 工作模式 | 先判断只读、实现、Bug 修复、Review、研究决策等模式 |
+| 上下文理解 | 修改前先找项目级 / 目录级规则，先理解调用链和现有实现 |
+| 用户改动保护 | 修改前检查 dirty worktree，禁止覆盖、回滚或格式化用户已有改动 |
+| 最小改动 | 只做当前任务需要的改动，不顺手重构、升级依赖或扩大范围 |
+| 风险分级 | S0-S4 区分咨询、小改、多模块、核心链路和破坏性操作 |
+| 人工确认门 | 依赖、schema、权限、数据迁移、发布、删除等高风险动作先确认 |
+| 证据验证 | 没有测试、构建、lint、smoke、日志或手工证据，不算真正完成 |
+| 多 agent 协作 | 明确文件所有权，避免多个 agent 同时写同一文件或 lockfile |
+
+### How to use `rules/AGENTS.md`
+
+把模板复制到目标仓库根目录：
+
+```bash
+cp rules/AGENTS.md /path/to/your-repo/AGENTS.md
+```
+
+然后按项目补充更近目录的规则。例如：
+
+```text
+your-repo/
+├── AGENTS.md                  # 全仓通用 AI 协作规则
+├── apps/web/AGENTS.md         # 前端目录的构建、测试、UI 规则
+├── apps/electron/AGENTS.md    # Electron main/preload/renderer 边界
+└── packages/api/AGENTS.md     # API、schema、权限、数据库规则
+```
+
+推荐分层方式：
+
+1. 根 `AGENTS.md` 只放全仓稳定规则：工作模式、风险分级、验证要求、提交边界。
+2. 子目录 `AGENTS.md` 放局部规则：构建命令、测试命令、架构边界、业务约束。
+3. 不把临时需求、一次性任务和具体 issue 写进长期规则。
+4. 不把 token、账号、私有路径、生产环境数据写进规则文件。
+5. 每次规则升级后，用真实任务或 review 场景验证它是否减少误改和返工。
+
+### Global vs project rules
+
+如果你希望所有仓库都默认遵守 Lazyday 工作协议，可以把 `rules/AGENTS.md` 作为个人级规则维护；如果只想在某个项目生效，则复制到该项目根目录。项目规则应优先承载具体命令和业务约束，个人级规则只放跨项目恒定成立的原则。
+
+### `rules/` vs plugin package
+
+`rules/AGENTS.md` 是完整、深度优化的规则库模板，适合作为项目初始化或团队标准。`lazyday-coding` 插件本体只分发可执行的 skills，不再在插件目录内携带 `templates/`，避免安装包内出现两套规则来源。
+
+- 新项目初始化：优先使用 `rules/AGENTS.md`。
+- 插件安装后的日常使用：通过 `lazyday-coding` 的 skills 触发工作流。
+- 团队规范沉淀：把 `rules/AGENTS.md` 复制到目标仓库后，再加入项目级构建、测试、架构和业务规则。
+- 插件作者开发新插件：参考 `rules/plugin-checklist.md`，确保双运行时 manifest、marketplace、skills 和验证说明齐全。
 
 ## Installation
 
@@ -238,11 +295,16 @@ Codex 和 Claude Code 的插件 manifest 分开维护，但技能、模板和方
 │       ├── .codex-plugin/
 │       │   └── plugin.json
 │       ├── skills/
-│       ├── templates/
 │       └── README.md
+├── rules/
+│   ├── AGENTS.md
+│   ├── CLAUDE.md
+│   ├── README.plugin.md
+│   ├── SKILL.md
+│   ├── mcp.json
+│   └── plugin-checklist.md
 ├── scripts/
 │   └── validate.sh
-├── templates/
 └── README.md
 ```
 
@@ -261,7 +323,7 @@ Codex 和 Claude Code 的插件 manifest 分开维护，但技能、模板和方
 2. 分别创建 `.codex-plugin/plugin.json` 和 `.claude-plugin/plugin.json`。
 3. 将插件加入 `.agents/plugins/marketplace.json`。
 4. 将插件加入 `.claude-plugin/marketplace.json`。
-5. 为插件补充 `README.md`、`skills/`、`templates/`。
+5. 为插件补充 `README.md` 和 `skills/`。
 6. 运行 `./scripts/validate.sh <plugin-dir>`。
 
 ### Compatibility checklist
@@ -277,6 +339,7 @@ Codex 和 Claude Code 的插件 manifest 分开维护，但技能、模板和方
 ### Near term
 
 - 完善 `lazyday-coding` 的技能边界、触发语和验证闭环。
+- 为 `rules/AGENTS.md` 增加更完整的安装说明、场景示例和裁剪指南。
 - 为 Codex / Claude Code 增加更完整的本地安装截图或录屏。
 - 为每个 skill 增加最小示例和反例。
 - 增加 marketplace / plugin manifest 的 CI 校验。
@@ -301,7 +364,7 @@ Codex 和 Claude Code 的插件 manifest 分开维护，但技能、模板和方
 
 插件和 marketplace 是高信任组件。安装前请确认来源可信，并理解插件可能包含 skills、hooks、MCP servers、commands 或其他能影响本地环境的能力。
 
-当前 `lazyday-coding` 只分发 skills 和 templates，不捆绑 MCP server，也不主动访问外部服务。后续如果引入 hooks、MCP、自动化或外部连接，会在 manifest、README 和版本说明中明确列出权限边界、数据流和关闭方式。
+当前 `lazyday-coding` 只分发 skills，不捆绑 MCP server，也不主动访问外部服务。后续如果引入 hooks、MCP、自动化或外部连接，会在 manifest、README 和版本说明中明确列出权限边界、数据流和关闭方式。
 
 ## Contributing
 
@@ -316,4 +379,3 @@ Codex 和 Claude Code 的插件 manifest 分开维护，但技能、模板和方
 ## License
 
 当前插件仍处于早期阶段，manifest 标记为 `UNLICENSED`。正式开源发布前会补充明确许可证、贡献协议和版本发布策略。
-
