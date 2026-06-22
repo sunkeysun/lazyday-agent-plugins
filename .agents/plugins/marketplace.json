@@ -1,7 +1,7 @@
 {
-  "name": "lazyday-local",
+  "name": "lazyday-agent-plugins",
   "interface": {
-    "displayName": "Lazyday Local"
+    "displayName": "Lazyday Agent Plugins"
   },
   "plugins": [
     {
@@ -14,7 +14,7 @@
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
       },
-      "category": "Productivity"
+      "category": "Coding"
     }
   ]
 }

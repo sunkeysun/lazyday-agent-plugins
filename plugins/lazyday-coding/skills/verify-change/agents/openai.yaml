@@ -1,0 +1,7 @@
+interface:
+  display_name: "变更验证"
+  short_description: "运行验证并汇总通过证据和风险"
+  default_prompt: "Use $verify-change to verify this code change and report the evidence."
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,7 @@
+interface:
+  display_name: "代码 Review"
+  short_description: "审查 diff、分支、补丁和实现风险"
+  default_prompt: "Use $review-code to review this diff for correctness, regressions, and risk."
+
+policy:
+  allow_implicit_invocation: false

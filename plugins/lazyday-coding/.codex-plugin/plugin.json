@@ -1,24 +1,41 @@
 {
   "name": "lazyday-coding",
   "version": "0.1.0",
-  "description": "Reusable coding workflows for development, debugging, review, and verification.",
+  "description": "Chinese coding workflows for planning, implementation, debugging, review, verification, and Git handoff.",
   "author": {
-    "name": "Lazyday"
+    "name": "sunkeysun",
+    "url": "https://github.com/sunkeysun"
   },
+  "homepage": "https://github.com/sunkeysun/lazyday-agent-plugins",
+  "repository": "https://github.com/sunkeysun/lazyday-agent-plugins",
+  "license": "UNLICENSED",
+  "keywords": [
+    "coding",
+    "skills",
+    "planning",
+    "debugging",
+    "code-review",
+    "verification",
+    "git"
+  ],
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Lazyday Coding",
-    "shortDescription": "Development workflows for Codex.",
-    "longDescription": "Packages Lazyday coding workflows for implementation, bug fixing, code review, and verification.",
-    "developerName": "Lazyday",
-    "category": "Productivity",
+    "shortDescription": "Chinese coding workflows for agentic development.",
+    "longDescription": "Packages Lazyday coding workflows for technical research, task breakdown, implementation, root-cause diagnosis, code review, verification, and Git handoff.",
+    "developerName": "sunkeysun",
+    "category": "Coding",
     "capabilities": [
+      "Planning",
       "Implementation",
       "Debugging",
       "Code review",
-      "Verification"
+      "Verification",
+      "Git handoff"
     ],
-    "defaultPrompt": "Use Lazyday Coding to implement or debug this repository task."
+    "defaultPrompt": [
+      "Use Lazyday Coding to analyze and implement this repository task.",
+      "Use Lazyday Coding to review and verify the current code changes."
+    ]
   }
 }

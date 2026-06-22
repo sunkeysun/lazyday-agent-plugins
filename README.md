@@ -1,29 +1,319 @@
 # Lazyday Agent Plugins
 
-This repository hosts Lazyday plugins that are intended to work with both
-Claude Code and Codex.
+[![Codex](https://img.shields.io/badge/Codex-compatible-111827)](https://developers.openai.com/codex)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-compatible-4f46e5)](https://code.claude.com/docs)
+[![Plugin Marketplace](https://img.shields.io/badge/plugin%20marketplace-local%20first-059669)](#installation)
+[![Status](https://img.shields.io/badge/status-early%20alpha-f59e0b)](#roadmap)
 
-## Layout
+Lazyday Agent Plugins 是一组面向 Codex 和 Claude Code 的通用 AI
+Agent 工具插件集合。
 
-- `.claude-plugin/marketplace.json`: Claude Code marketplace catalog.
-- `.agents/plugins/marketplace.json`: Codex marketplace catalog.
-- `plugins/<plugin-name>/.claude-plugin/plugin.json`: Claude Code plugin manifest.
-- `plugins/<plugin-name>/.codex-plugin/plugin.json`: Codex plugin manifest.
-- `plugins/<plugin-name>/skills/`: Shared agent skills.
-- `templates/`: Repository-level templates for bootstrapping target projects.
-- `plugins/<plugin-name>/templates/`: Runtime templates packaged with the plugin.
+它的目标很直接：把高质量 AI 协作里的通用流程、工程纪律、验证闭环和上下文模板沉淀成可安装、可复用、可分发的插件，让人从重复解释、反复纠偏和低价值执行中解放出来，把注意力留给真正需要判断力和创造力的事情。
 
-## First Plugin
+> 人人都有 Lazyday：人负责方向、决策和创造，AI 负责可靠执行、证据验证和持续交付。
 
-`lazyday-coding` packages reusable coding workflows for implementation,
-debugging, review, and verification.
+## Why Lazyday
 
-## Validation
+今天的大模型已经很强，但很多团队使用 AI 编程工具时仍然会遇到相同问题：
+
+- 每次都要重复说明工作方式、只读边界、验证要求和提交规范。
+- Agent 容易抢跑、多改、漏改、覆盖用户改动，或者在没有证据时交付。
+- Codex、Claude Code、不同项目和不同成员之间缺少统一的协作协议。
+- 好的 prompt 和 workflow 难以版本化、复用、评审、安装和迭代。
+- 人仍然在做大量低价值操作：拆任务、贴规则、补上下文、提醒跑测试、整理提交。
+
+Lazyday 的方向是把这些内容产品化为插件：
+
+- **工作流即插件**：把调研、拆解、实现、诊断、Review、验证、提交这些流程做成可安装能力。
+- **规则即资产**：把 AI 编程黄金法则、项目模板和检查清单沉淀到版本库。
+- **双运行时兼容**：同一套能力同时服务 Codex 和 Claude Code，避免团队被单一工具锁死。
+- **证据驱动交付**：强调最小改动、保护用户已有改动、验证结果和可回滚边界。
+- **本地优先分发**：先支持个人和团队在本地/私有仓库中使用，再逐步走向公开市场。
+
+## What Is Inside
+
+当前仓库包含一个本地插件市场和第一个核心插件 `lazyday-coding`。
+
+| Layer | Path | Purpose |
+| --- | --- | --- |
+| Codex marketplace | `.agents/plugins/marketplace.json` | Codex 可发现的插件目录 |
+| Claude Code marketplace | `.claude-plugin/marketplace.json` | Claude Code 可添加的插件市场 |
+| Codex plugin manifest | `plugins/lazyday-coding/.codex-plugin/plugin.json` | Codex 插件描述、技能入口和展示信息 |
+| Claude plugin manifest | `plugins/lazyday-coding/.claude-plugin/plugin.json` | Claude Code 插件描述和技能入口 |
+| Shared skills | `plugins/lazyday-coding/skills/` | 双运行时共享的 Lazyday 工作流 |
+| Runtime templates | `plugins/lazyday-coding/templates/` | 插件随包分发的项目模板 |
+| Bootstrap templates | `templates/` | 创建新插件或初始化目标项目的模板 |
+| Validation | `scripts/validate.sh` | 本地校验 Codex / Claude Code 插件结构 |
+
+## Current Plugin: lazyday-coding
+
+`lazyday-coding` 是面向中文代码开发场景的基础插件，覆盖从想法到提交的主流程。
+
+| Skill | When to use | Output |
+| --- | --- | --- |
+| `research-approach` | 先调研、出方案、评估设计、比较最佳实践 | 多方案对比、推荐方案、风险边界和实现指导 |
+| `break-down-task` | 把已确认方案拆成可执行任务 | 任务图、依赖关系、并发边界、验证矩阵 |
+| `implement-change` | 已授权修改代码、修复问题、按方案落地 | 最小精准改动、验证证据、剩余风险 |
+| `diagnose-problem` | 分析 bug、日志、测试失败、线上异常 | 时间线、候选根因、影响范围、修复建议 |
+| `review-code` | Review 当前 diff、PR、文件或方案 | Findings、严重级别、行号证据、测试缺口 |
+| `verify-change` | 跑测试、验证修复、交付前检查 | 验证矩阵、命令结果、未覆盖路径 |
+| `git-commit` | 生成提交信息、提交、按要求推送 | 提交范围判断、commit message、push 结果 |
+
+这些技能默认遵守 Lazyday 的核心工程约束：
+
+- 用户要求只读时绝不改代码。
+- 修改前先理解项目规则和 dirty worktree。
+- 优先复用已有实现，不顺手重构。
+- 每一行改动都服务当前任务。
+- 高风险决策先让人确认。
+- 没有验证证据，不算完成。
+
+## Installation
+
+### Prerequisites
+
+- 已安装并登录 [Codex](https://developers.openai.com/codex)。
+- 已安装并登录 [Claude Code](https://code.claude.com/docs)。
+- 如果使用本地路径安装，先 clone 本仓库：
+
+```bash
+git clone https://github.com/sunkeysun/lazyday-agent-plugins.git
+cd lazyday-agent-plugins
+```
+
+### Install in Codex
+
+Codex 支持通过 marketplace 安装插件。Lazyday 提供的是 repo-scoped marketplace：
+
+```bash
+codex plugin marketplace add .
+codex plugin marketplace list
+```
+
+然后打开 Codex 插件目录：
+
+```text
+codex
+/plugins
+```
+
+在插件目录中选择 `Lazyday Agent Plugins` marketplace，找到并安装 `lazyday-coding`。安装后开启新线程，直接描述任务，或在 prompt 中显式选择 Lazyday Coding / 相关技能。
+
+如果后续从 GitHub 分发，可使用同类命令添加远程市场：
+
+```bash
+codex plugin marketplace add sunkeysun/lazyday-agent-plugins
+```
+
+### Install in Claude Code
+
+在 Claude Code 交互会话中添加本地 marketplace：
+
+```text
+/plugin marketplace add .
+/plugin install lazyday-coding@lazyday-agent-plugins
+/reload-plugins
+```
+
+也可以在仓库公开后通过 GitHub shorthand 添加：
+
+```text
+/plugin marketplace add sunkeysun/lazyday-agent-plugins
+/plugin install lazyday-coding@lazyday-agent-plugins
+/reload-plugins
+```
+
+Claude Code 插件技能会按插件名命名空间化。安装后可以尝试：
+
+```text
+/lazyday-coding:research-approach 先调研这个需求应该怎么实现，不要改代码
+/lazyday-coding:review-code review 当前 diff，重点看回归风险
+/lazyday-coding:verify-change 验证这次改动是否完整
+```
+
+### Validate the local package
 
 ```bash
 ./scripts/validate.sh
 ```
 
-The script validates the Codex plugin manifest with the local Codex plugin
-validator. If the `claude` command is installed, it also runs Claude Code
-plugin validation.
+如果只想直接验证 Claude Code marketplace：
+
+```bash
+claude plugin validate .claude-plugin/marketplace.json
+```
+
+## Usage Patterns
+
+### 1. 先调研，再落地
+
+```text
+使用 Lazyday Coding 先调研这个功能怎么做，不要改代码。
+目标：...
+约束：...
+验收标准：...
+```
+
+适合不确定方案、涉及架构取舍、需要查官方文档或比较多个实现路径的任务。
+
+### 2. 把方案拆成 Agent 任务
+
+```text
+把上面的方案拆成可交给多个 agent 执行的任务，标明哪些可以并行，哪些必须串行。
+```
+
+适合较大改动、多人协作、并行子任务或希望减少 agent 互相覆盖的场景。
+
+### 3. 最小实现并验证
+
+```text
+按这个方案落地，只解决当前问题，不做额外重构。完成后运行最小验证。
+```
+
+适合已经确认方向，需要让 agent 稳定写代码并给出证据的任务。
+
+### 4. 只做 Review
+
+```text
+review 当前 diff，只输出真实问题，按严重程度排序，不改代码。
+```
+
+适合提交前把关、合并前检查、回归风险评估。
+
+### 5. 提交与推送
+
+```text
+整理这次改动，生成提交信息。确认范围后提交并推送。
+```
+
+适合把 agent 产出的改动安全收束为 commit，避免把其他会话或用户未完成改动误提交。
+
+## Design Principles
+
+### 1. Human decision, agent execution
+
+Lazyday 不追求让 AI 替代人的判断。它把重复、可验证、可流程化的部分交给 agent，把不可逆决策、产品判断、技术取舍和创造性工作留给人。
+
+### 2. Evidence over vibes
+
+每个工作流都强调证据链：读了哪些规则，为什么这样改，跑了什么验证，哪些路径没覆盖，剩余风险是什么。
+
+### 3. Local first, team ready
+
+本仓库先服务本地和团队私有分发。随着插件成熟，可以接入远程 marketplace、团队托管、版本发布和更严格的 CI。
+
+### 4. Cross-runtime by design
+
+Codex 和 Claude Code 的插件 manifest 分开维护，但技能、模板和方法论尽量共享。这样既尊重不同宿主的约定，也避免重复维护两套工作流。
+
+### 5. Minimal surface area
+
+当前插件先聚焦 coding workflow，不急着塞进所有能力。未来的通用工具、知识管理、项目管理、浏览器自动化、文档处理、数据分析等能力会按独立插件扩展。
+
+## Documentation Sources
+
+本 README 的安装与市场设计参考了以下官方文档和开源 README 实践：
+
+- [Codex Plugins](https://developers.openai.com/codex/plugins)：Codex 插件可包含 skills、apps、MCP servers，并可通过 plugin directory 安装和启用。
+- [Codex Build Plugins](https://developers.openai.com/codex/plugins/build)：Codex repo marketplace、personal marketplace、`codex plugin marketplace add` 和本地插件结构。
+- [Claude Code: Discover and install plugins](https://code.claude.com/docs/en/discover-plugins)：Claude Code marketplace 添加、插件安装、`/reload-plugins`、安装 scope 和安全提示。
+- [Claude Code: Create plugins](https://code.claude.com/docs/en/plugins)：Claude Code 插件可打包 skills、agents、hooks、MCP servers 等能力。
+- [Claude Code: Create plugin marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)：Claude Code marketplace 分发模型和市场目录结构。
+- [GitHub Docs: About READMEs](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes)：README 应说明项目做什么、为什么有用、如何开始、在哪里获得帮助。
+- [awesome-readme](https://github.com/matiassingers/awesome-readme) 和 [Best-README-Template](https://github.com/othneildrew/Best-README-Template)：优秀开源 README 通常具备清晰定位、快速开始、安装、使用示例、路线图和贡献入口。
+
+## Project Structure
+
+```text
+.
+├── .agents/
+│   └── plugins/
+│       └── marketplace.json
+├── .claude-plugin/
+│   └── marketplace.json
+├── plugins/
+│   └── lazyday-coding/
+│       ├── .claude-plugin/
+│       │   └── plugin.json
+│       ├── .codex-plugin/
+│       │   └── plugin.json
+│       ├── skills/
+│       ├── templates/
+│       └── README.md
+├── scripts/
+│   └── validate.sh
+├── templates/
+└── README.md
+```
+
+## Development Workflow
+
+### Add a new skill
+
+1. 在 `plugins/<plugin>/skills/<skill-name>/SKILL.md` 创建技能。
+2. 使用 frontmatter 声明 `name` 和 `description`。
+3. 在插件 README 中补充能力说明。
+4. 运行 `./scripts/validate.sh`。
+
+### Add a new plugin
+
+1. 在 `plugins/<plugin-name>/` 下创建插件目录。
+2. 分别创建 `.codex-plugin/plugin.json` 和 `.claude-plugin/plugin.json`。
+3. 将插件加入 `.agents/plugins/marketplace.json`。
+4. 将插件加入 `.claude-plugin/marketplace.json`。
+5. 为插件补充 `README.md`、`skills/`、`templates/`。
+6. 运行 `./scripts/validate.sh <plugin-dir>`。
+
+### Compatibility checklist
+
+- 插件名使用稳定的 kebab-case。
+- Codex 和 Claude Code manifest 各自只放对应运行时支持的字段。
+- skills 内容尽量运行时无关；运行时差异放在安装和使用说明中。
+- 插件内引用文件必须在插件目录内，避免安装到缓存后路径失效。
+- 不把私有路径、token、账号、生产环境信息写入技能、模板或日志。
+
+## Roadmap
+
+### Near term
+
+- 完善 `lazyday-coding` 的技能边界、触发语和验证闭环。
+- 为 Codex / Claude Code 增加更完整的本地安装截图或录屏。
+- 为每个 skill 增加最小示例和反例。
+- 增加 marketplace / plugin manifest 的 CI 校验。
+- 增加英文 README 或双语入口，方便公开传播。
+
+### Mid term
+
+- 增加 `lazyday-product`：产品调研、PRD、用户故事、验收标准和发布说明。
+- 增加 `lazyday-research`：联网调研、来源分级、证据摘要和决策备忘录。
+- 增加 `lazyday-docs`：文档重写、知识库整理、变更说明和团队 SOP。
+- 增加 `lazyday-ops`：例行任务、状态检查、告警摘要和运维 runbook。
+- 增加更严格的版本发布、变更日志和兼容性矩阵。
+
+### Long term
+
+- 建立 Lazyday 插件生态：个人、团队和社区都可以贡献高质量 agent workflow。
+- 提供面向 Codex、Claude Code 和其他 agent runtime 的统一插件生成工具。
+- 将常见 AI 工作模式抽象为可组合、可评审、可安装的标准能力。
+- 让更多非工程用户也能拥有自己的 Lazyday：用 AI 自动运行创造价值。
+
+## Security and Trust
+
+插件和 marketplace 是高信任组件。安装前请确认来源可信，并理解插件可能包含 skills、hooks、MCP servers、commands 或其他能影响本地环境的能力。
+
+当前 `lazyday-coding` 只分发 skills 和 templates，不捆绑 MCP server，也不主动访问外部服务。后续如果引入 hooks、MCP、自动化或外部连接，会在 manifest、README 和版本说明中明确列出权限边界、数据流和关闭方式。
+
+## Contributing
+
+欢迎贡献新的 Lazyday workflow，但请优先遵守这些原则：
+
+- 先描述要解决的真实问题，再新增 skill。
+- 每个 skill 都要有清晰触发场景、默认模式、禁止行为和交付形态。
+- 尽量复用现有模板和工程纪律，不复制一份略有差异的规则。
+- 新能力必须能被验证，至少能通过 manifest 校验和静态审查。
+- 面向公开生态的文档要具体、可复制、少空话。
+
+## License
+
+当前插件仍处于早期阶段，manifest 标记为 `UNLICENSED`。正式开源发布前会补充明确许可证、贡献协议和版本发布策略。
+

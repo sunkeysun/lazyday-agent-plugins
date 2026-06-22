@@ -1,13 +1,21 @@
 {
-  "name": "lazyday-local",
+  "name": "lazyday-agent-plugins",
+  "metadata": {
+    "description": "Local Lazyday coding workflow plugins for Claude Code."
+  },
   "owner": {
-    "name": "Lazyday"
+    "name": "sunkeysun"
   },
   "plugins": [
     {
       "name": "lazyday-coding",
       "source": "./plugins/lazyday-coding",
-      "description": "Reusable coding workflows for development, debugging, review, and verification."
+      "description": "Chinese coding workflows for planning, implementation, debugging, review, verification, and Git handoff.",
+      "version": "0.1.0",
+      "author": {
+        "name": "sunkeysun",
+        "url": "https://github.com/sunkeysun"
+      }
     }
   ]
 }

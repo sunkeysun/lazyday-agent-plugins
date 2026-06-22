@@ -1,0 +1,7 @@
+interface:
+  display_name: "任务拆解"
+  short_description: "把技术方案拆成可执行任务图"
+  default_prompt: "Use $break-down-task to turn this coding plan into executable, verifiable tasks."
+
+policy:
+  allow_implicit_invocation: false

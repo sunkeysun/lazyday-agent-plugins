@@ -1,11 +1,22 @@
 {
   "name": "lazyday-coding",
   "version": "0.1.0",
-  "description": "Reusable coding workflows for development, debugging, review, and verification.",
+  "description": "Chinese coding workflows for planning, implementation, debugging, review, verification, and Git handoff.",
   "author": {
-    "name": "Lazyday"
+    "name": "sunkeysun",
+    "url": "https://github.com/sunkeysun"
   },
+  "homepage": "https://github.com/sunkeysun/lazyday-agent-plugins",
+  "repository": "https://github.com/sunkeysun/lazyday-agent-plugins",
   "license": "UNLICENSED",
-  "skills": "./skills/",
-  "mcpServers": "./.mcp.json"
+  "keywords": [
+    "coding",
+    "skills",
+    "planning",
+    "debugging",
+    "code-review",
+    "verification",
+    "git"
+  ],
+  "skills": "./skills/"
 }
