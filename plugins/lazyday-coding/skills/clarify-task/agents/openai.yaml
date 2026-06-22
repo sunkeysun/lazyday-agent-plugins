@@ -1,0 +1,7 @@
+interface:
+  display_name: "任务澄清"
+  short_description: "补全任务契约并选择需求产物"
+  default_prompt: "使用 $clarify-task 澄清这个开发任务，必要时选择或创建需求产物。"
+
+policy:
+  allow_implicit_invocation: false

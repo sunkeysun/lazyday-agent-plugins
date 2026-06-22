@@ -1,0 +1,7 @@
+interface:
+  display_name: "产物管理"
+  short_description: "管理跨会话需求产物和交接状态"
+  default_prompt: "使用 $manage-artifacts 管理 Lazyday 需求产物，选择当前需求并整理 handoff。"
+
+policy:
+  allow_implicit_invocation: false

@@ -1,21 +1,27 @@
 {
   "name": "lazyday-coding",
   "version": "0.1.0",
-  "description": "Chinese coding workflows for planning, implementation, debugging, review, verification, and Git handoff.",
+  "description": "Chinese coding workflows for task routing, task clarification, context recovery, artifact management, repository exploration, planning, implementation, debugging, review, verification, and Git handoff.",
   "author": {
     "name": "sunkeysun",
     "url": "https://github.com/sunkeysun"
   },
   "homepage": "https://github.com/sunkeysun/lazyday-agent-plugins",
   "repository": "https://github.com/sunkeysun/lazyday-agent-plugins",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "keywords": [
     "coding",
     "skills",
+    "task-routing",
     "planning",
+    "task-clarification",
+    "context-recovery",
+    "artifact-management",
+    "repo-exploration",
     "debugging",
     "code-review",
     "verification",
+    "artifact-handoff",
     "git"
   ],
   "skills": "./skills/"

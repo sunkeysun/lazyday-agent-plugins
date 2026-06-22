@@ -1,0 +1,7 @@
+interface:
+  display_name: "个人复盘"
+  short_description: "生成日报周报年报、项目和心情复盘"
+  default_prompt: "使用 $review-life-log 基于我的 Lazyday Vault 生成这段时间的复盘。"
+
+policy:
+  allow_implicit_invocation: false

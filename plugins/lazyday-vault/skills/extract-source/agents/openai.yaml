@@ -1,0 +1,7 @@
+interface:
+  display_name: "资料抽取"
+  short_description: "从 raw source 生成 extract、chunk 和 source map"
+  default_prompt: "使用 $extract-source 从这个 raw source 抽取可检索内容，并建立 source map。"
+
+policy:
+  allow_implicit_invocation: false

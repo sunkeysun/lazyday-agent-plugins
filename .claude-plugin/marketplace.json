@@ -16,6 +16,26 @@
         "name": "sunkeysun",
         "url": "https://github.com/sunkeysun"
       }
+    },
+    {
+      "name": "lazyday-vault",
+      "source": "./plugins/lazyday-vault",
+      "description": "Chinese personal knowledge vault workflows for source capture, raw preservation, source extraction, knowledge integration, interaction capture, conflict handling, retrieval, research, and retrospectives.",
+      "version": "0.1.0",
+      "author": {
+        "name": "sunkeysun",
+        "url": "https://github.com/sunkeysun"
+      }
+    },
+    {
+      "name": "lazyday-worldcup",
+      "source": "./plugins/lazyday-worldcup",
+      "description": "World Cup match and Sporttery forecasting workflows for current fixtures, upset risk, portfolios, and champion predictions.",
+      "version": "0.1.0",
+      "author": {
+        "name": "sunkeysun",
+        "url": "https://github.com/sunkeysun"
+      }
     }
   ]
 }

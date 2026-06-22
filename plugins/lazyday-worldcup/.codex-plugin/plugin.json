@@ -1,0 +1,40 @@
+{
+  "name": "lazyday-worldcup",
+  "version": "0.1.0",
+  "description": "World Cup match and Sporttery forecasting workflows for current fixtures, upset risk, portfolios, and champion predictions.",
+  "author": {
+    "name": "sunkeysun",
+    "url": "https://github.com/sunkeysun"
+  },
+  "homepage": "https://github.com/sunkeysun/lazyday-agent-plugins",
+  "repository": "https://github.com/sunkeysun/lazyday-agent-plugins",
+  "license": "MIT",
+  "keywords": [
+    "world-cup",
+    "forecasting",
+    "sporttery",
+    "football",
+    "probability",
+    "upset-risk"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Lazyday Worldcup",
+    "shortDescription": "World Cup match, Sporttery, and champion forecasting workflows.",
+    "longDescription": "Packages the forecasting-world-cup-matches skill for live World Cup fixture research, official Sporttery calculator data, upset-risk auditing, probability estimates, 2-leg portfolio construction, and champion or finalist forecasts.",
+    "developerName": "sunkeysun",
+    "category": "Productivity",
+    "capabilities": [
+      "World Cup forecasting",
+      "Sporttery data retrieval",
+      "Upset risk analysis",
+      "Probability modeling",
+      "Portfolio construction",
+      "Champion forecasting"
+    ],
+    "defaultPrompt": [
+      "Use World Cup Forecasting to analyze today's World Cup fixtures with current evidence.",
+      "Use World Cup Forecasting to fetch official Sporttery data and build eligible portfolio recommendations."
+    ]
+  }
+}

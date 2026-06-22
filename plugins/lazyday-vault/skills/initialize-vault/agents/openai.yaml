@@ -1,0 +1,7 @@
+interface:
+  display_name: "Vault 初始化"
+  short_description: "幂等创建或修复 Lazyday Vault 的基础目录和索引"
+  default_prompt: "使用 $initialize-vault 在当前项目根目录初始化 Lazyday Vault 基础结构。"
+
+policy:
+  allow_implicit_invocation: false

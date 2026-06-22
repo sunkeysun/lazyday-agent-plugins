@@ -1,0 +1,7 @@
+interface:
+  display_name: "恢复上下文"
+  short_description: "读取需求产物，匹配当前任务上下文并推荐下一步技能"
+  default_prompt: "使用 $resume-context 根据我的描述读取 Lazyday 需求产物，推荐要继续的需求和下一步 skill。"
+
+policy:
+  allow_implicit_invocation: false

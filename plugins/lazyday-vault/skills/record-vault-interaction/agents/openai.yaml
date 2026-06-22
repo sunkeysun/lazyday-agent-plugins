@@ -1,0 +1,7 @@
+interface:
+  display_name: "交互记录"
+  short_description: "把问答、修正、反馈和决策作为 source 入库"
+  default_prompt: "使用 $record-vault-interaction 把这次 vault 交互记录为可追溯 source。"
+
+policy:
+  allow_implicit_invocation: false

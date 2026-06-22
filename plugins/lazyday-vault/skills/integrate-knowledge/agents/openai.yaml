@@ -1,0 +1,7 @@
+interface:
+  display_name: "知识整合"
+  short_description: "打标、关联、更新索引和 LLM wiki"
+  default_prompt: "使用 $integrate-knowledge 把这份 extract 整合进 Lazyday Vault 的索引和 wiki。"
+
+policy:
+  allow_implicit_invocation: false

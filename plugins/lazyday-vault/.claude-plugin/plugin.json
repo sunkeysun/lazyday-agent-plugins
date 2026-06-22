@@ -1,0 +1,30 @@
+{
+  "name": "lazyday-vault",
+  "version": "0.1.0",
+  "description": "Chinese personal knowledge vault workflows for multimodal source capture, raw-data preservation, source extraction, knowledge integration, interaction capture, conflict handling, wiki synthesis, retrieval, deep research, retrospectives, and cited answers.",
+  "author": {
+    "name": "sunkeysun",
+    "url": "https://github.com/sunkeysun"
+  },
+  "homepage": "https://github.com/sunkeysun/lazyday-agent-plugins",
+  "repository": "https://github.com/sunkeysun/lazyday-agent-plugins",
+  "license": "MIT",
+  "keywords": [
+    "knowledge-management",
+    "personal-vault",
+    "second-brain",
+    "llm-wiki",
+    "para",
+    "source-map",
+    "claim-index",
+    "event-ledger",
+    "interaction-capture",
+    "conflict-resolution",
+    "retrieval",
+    "citations",
+    "notes",
+    "research",
+    "retrospective"
+  ],
+  "skills": "./skills/"
+}

@@ -1,0 +1,7 @@
+interface:
+  display_name: "资料捕获"
+  short_description: "把任意输入保存为可追溯 raw source"
+  default_prompt: "使用 $capture-source 把这份资料保存到 Lazyday Vault，并保留原始数据。"
+
+policy:
+  allow_implicit_invocation: false

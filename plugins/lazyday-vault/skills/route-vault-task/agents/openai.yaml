@@ -1,0 +1,7 @@
+interface:
+  display_name: "Vault 路由"
+  short_description: "判断资料入库、检索、研究或复盘该用哪个 vault skill"
+  default_prompt: "Use $route-vault-task to choose the right Lazyday Vault workflow for this knowledge task."
+
+policy:
+  allow_implicit_invocation: true

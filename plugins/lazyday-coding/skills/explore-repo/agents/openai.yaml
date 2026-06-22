@@ -1,0 +1,7 @@
+interface:
+  display_name: "项目探索"
+  short_description: "构建仓库上下文和调用链地图"
+  default_prompt: "使用 $explore-repo 探索这个仓库或模块，并输出可交接的上下文地图。"
+
+policy:
+  allow_implicit_invocation: false

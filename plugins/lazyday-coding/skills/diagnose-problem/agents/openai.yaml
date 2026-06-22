@@ -1,7 +1,7 @@
 interface:
   display_name: "问题定位"
   short_description: "分析报错、日志和异常行为的根因"
-  default_prompt: "Use $diagnose-problem to analyze this bug, log, or failing test without changing code."
+  default_prompt: "使用 $diagnose-problem 分析这个 bug、日志或失败测试，先不要改代码。"
 
 policy:
   allow_implicit_invocation: false

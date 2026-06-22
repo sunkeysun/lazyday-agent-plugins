@@ -1,7 +1,7 @@
 interface:
   display_name: "Git 提交"
   short_description: "整理改动范围并生成提交信息"
-  default_prompt: "Use $commit-changes to inspect the current diff and prepare a safe commit."
+  default_prompt: "使用 $commit-changes 检查当前改动范围，并安全生成提交或推送代码。"
 
 policy:
   allow_implicit_invocation: false

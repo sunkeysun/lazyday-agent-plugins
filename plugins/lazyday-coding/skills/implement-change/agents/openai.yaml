@@ -1,7 +1,7 @@
 interface:
   display_name: "代码实现"
   short_description: "按任务要求执行最小精准改动"
-  default_prompt: "Use $implement-change to implement this coding task with minimal, verified edits."
+  default_prompt: "使用 $implement-change 以最小、可验证的方式实现这个代码任务。"
 
 policy:
   allow_implicit_invocation: false

@@ -1,0 +1,6 @@
+interface:
+  display_name: "世界杯专业预测"
+  short_description: "融合实时赛况、体彩可售方案、爆冷风险与概率模型进行世界杯预测"
+  default_prompt: "使用 $forecasting-world-cup-matches 获取官方体彩计算器数据，排序当前世界杯预测，并构建符合资格的 steady、growth、aggressive 2 串 1 组合。"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Vault 深研"
+  short_description: "基于 vault 和授权外部来源做深入研究"
+  default_prompt: "使用 $vault-deep-research 基于我的 Lazyday Vault 对这个问题做深入研究。"
+
+policy:
+  allow_implicit_invocation: false

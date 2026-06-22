@@ -15,6 +15,30 @@
         "authentication": "ON_INSTALL"
       },
       "category": "Coding"
+    },
+    {
+      "name": "lazyday-vault",
+      "source": {
+        "source": "local",
+        "path": "./plugins/lazyday-vault"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "lazyday-worldcup",
+      "source": {
+        "source": "local",
+        "path": "./plugins/lazyday-worldcup"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
     }
   ]
 }

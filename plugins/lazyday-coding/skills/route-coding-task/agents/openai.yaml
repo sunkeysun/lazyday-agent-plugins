@@ -1,0 +1,7 @@
+interface:
+  display_name: "任务路由"
+  short_description: "判断当前请求该用哪个 coding skill"
+  default_prompt: "Use $route-coding-task to decide which Lazyday Coding skill should handle this repository task."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+interface:
+  display_name: "资料加工"
+  short_description: "协调抽取与知识整合阶段"
+  default_prompt: "使用 $process-source 判断这个 source 还缺哪一层处理，并协调抽取或知识整合。"
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,59 @@
+{
+  "name": "lazyday-vault",
+  "version": "0.1.0",
+  "description": "Chinese personal knowledge vault workflows for multimodal source capture, raw-data preservation, source extraction, knowledge integration, interaction capture, conflict handling, wiki synthesis, retrieval, deep research, retrospectives, and cited answers.",
+  "author": {
+    "name": "sunkeysun",
+    "url": "https://github.com/sunkeysun"
+  },
+  "homepage": "https://github.com/sunkeysun/lazyday-agent-plugins",
+  "repository": "https://github.com/sunkeysun/lazyday-agent-plugins",
+  "license": "MIT",
+  "keywords": [
+    "knowledge-management",
+    "personal-vault",
+    "second-brain",
+    "llm-wiki",
+    "para",
+    "source-map",
+    "claim-index",
+    "event-ledger",
+    "interaction-capture",
+    "conflict-resolution",
+    "retrieval",
+    "citations",
+    "notes",
+    "research",
+    "retrospective"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Lazyday Vault",
+    "shortDescription": "Personal knowledge vault workflows with citations.",
+    "longDescription": "Packages Lazyday workflows for capturing arbitrary personal sources, preserving raw data, extracting source maps, integrating knowledge into indexes and an LLM-authored wiki, answering questions with citations, running deep research, producing daily/weekly/yearly retrospectives, and health-checking the vault.",
+    "developerName": "sunkeysun",
+    "category": "Productivity",
+    "capabilities": [
+      "Multimodal source capture",
+      "Raw source preservation",
+      "Source extraction and source maps",
+      "Vault initialization",
+      "Knowledge integration",
+      "Interaction capture",
+      "Claim-level conflict tracking",
+      "Event ledger and rebuild protocol",
+      "Metadata and tag extraction",
+      "PARA and timeline organization",
+      "Persistent LLM wiki maintenance",
+      "Evidence-backed retrieval",
+      "Cited answers",
+      "Deep research",
+      "Daily and periodic retrospectives",
+      "Vault health checks"
+    ],
+    "defaultPrompt": [
+      "使用 Lazyday Vault 处理这份资料，保留原始数据并更新知识库。",
+      "使用 Lazyday Vault 基于我的资料回答这个问题，并给出原始引用。"
+    ]
+  }
+}

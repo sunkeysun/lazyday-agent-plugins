@@ -1,7 +1,7 @@
 interface:
   display_name: "方案调研"
   short_description: "调研技术方案、选型和实现取舍"
-  default_prompt: "Use $research-approach to compare technical approaches before coding."
+  default_prompt: "使用 $research-approach 在编码前比较技术方案并给出推荐。"
 
 policy:
   allow_implicit_invocation: false

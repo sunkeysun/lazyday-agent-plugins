@@ -23,6 +23,28 @@ description: 生产级中文代码 Review 技能。用于审查当前 diff、指
 
 如果范围不明确，先用只读命令建立概览；仍无法确定 review 对象时，问一个最小澄清问题。
 
+如果用户说“继续 review”“审查上次改动”但需求或改动上下文不明确，先使用 `resume-context` 匹配候选需求和可用产物。
+
+## 产物交接
+
+需求产物由 `manage-artifacts` 统一管理。需要创建、选择、切换、列出、归档或修复 `.lazyday/coding/requirements/` 时，先使用 `manage-artifacts`。如果用户说“继续”“上次”“当前需求”但没有明确需求 ID，先使用 `resume-context` 匹配候选需求。
+
+当前需求已明确时，本 skill 只读取和更新与代码 Review 相关的产物。
+
+本 skill 优先读取：
+
+- `brief.md`：目标、非目标、验收标准和风险等级。
+- `repo-context.md`：相关入口、调用链、核心链路和高风险文件。
+- `research.md`：已确认方案和不做事项，用于判断实现是否偏离方案。
+- `plan.md`：任务边界、文件所有权和验证矩阵。
+- `implementation.md`：实际改动摘要和已知未验证风险。
+- `verification.md`：已运行验证、失败证据和剩余风险。
+- `handoff.md`：上一阶段最短交接摘要。
+
+当用户要求跨会话记录、继续交接或允许落盘，且当前需求已明确时，把 review 结果写入 `review.md`，并同步更新 `handoff.md`。不要默认提交 `.lazyday/`。
+
+如果用户明确限定“只使用本 skill”“只用 review-code”或限定本轮只能使用某几个 skill，不得自动转交 `resume-context`、`manage-artifacts` 或其他后续 skill；只能在输出中给出建议。
+
 ## 快速协议
 
 1. 判断范围和模式：只读 review、合入前把关、架构 review、回归风险 review、评分 review。
@@ -165,6 +187,8 @@ rg -n "TODO|FIXME|ts-ignore|expect-error|any\\b|eslint-disable|catch \\(|throw n
 - 说明未审查范围、未运行验证或依赖作者确认的假设。
 ```
 
+单独使用本 skill 时，最后明确本轮是否已完成：如果用户只要求 review，输出问题清单、测试缺口和结论即完成；后续修复、验证或提交只是建议，不能自动进入写入模式。
+
 ## 质量门
 
 输出前自检：
@@ -180,6 +204,10 @@ rg -n "TODO|FIXME|ts-ignore|expect-error|any\\b|eslint-disable|catch \\(|throw n
 
 ## 可选后续
 
+- 需要从已有产物恢复上下文或匹配候选需求：交给 `resume-context`。
+- 需要创建、选择或切换需求产物：交给 `manage-artifacts`。
+- 需要澄清 review 范围或选择需求产物：交给 `clarify-task`。
+- 需要补上下文地图：交给 `explore-repo`。
 - 需要修复问题项：交给 `implement-change` 或按用户明确指令进入实现。
 - 需要验证修复：交给 `verify-change`。
 - 需要拆分大改动：交给 `break-down-task`。
