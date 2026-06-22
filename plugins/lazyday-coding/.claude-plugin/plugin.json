@@ -1,0 +1,11 @@
+{
+  "name": "lazyday-coding",
+  "version": "0.1.0",
+  "description": "Reusable coding workflows for development, debugging, review, and verification.",
+  "author": {
+    "name": "Lazyday"
+  },
+  "license": "UNLICENSED",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

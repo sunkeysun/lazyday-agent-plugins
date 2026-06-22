@@ -1,0 +1,24 @@
+{
+  "name": "lazyday-coding",
+  "version": "0.1.0",
+  "description": "Reusable coding workflows for development, debugging, review, and verification.",
+  "author": {
+    "name": "Lazyday"
+  },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Lazyday Coding",
+    "shortDescription": "Development workflows for Codex.",
+    "longDescription": "Packages Lazyday coding workflows for implementation, bug fixing, code review, and verification.",
+    "developerName": "Lazyday",
+    "category": "Productivity",
+    "capabilities": [
+      "Implementation",
+      "Debugging",
+      "Code review",
+      "Verification"
+    ],
+    "defaultPrompt": "Use Lazyday Coding to implement or debug this repository task."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "lazyday-local",
+  "owner": {
+    "name": "Lazyday"
+  },
+  "plugins": [
+    {
+      "name": "lazyday-coding",
+      "source": "./plugins/lazyday-coding",
+      "description": "Reusable coding workflows for development, debugging, review, and verification."
+    }
+  ]
+}

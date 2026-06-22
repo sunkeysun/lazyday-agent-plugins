@@ -1,0 +1,20 @@
+{
+  "name": "lazyday-local",
+  "interface": {
+    "displayName": "Lazyday Local"
+  },
+  "plugins": [
+    {
+      "name": "lazyday-coding",
+      "source": {
+        "source": "local",
+        "path": "./plugins/lazyday-coding"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
